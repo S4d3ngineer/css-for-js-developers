@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add styles here! */
+
+* {
+  margin: 0;
+ }
+
+strong {
+  color: hsla(160, 100%, 30%, 1);
+}
+
+.intro-chunk {
+  margin: 96px auto 64px;
+  max-width: 70ch;
+  padding: 24px;
+}
+
+.intro-chunk p {
+  max-width: 40ch;
+}
+
+.title {
+  padding-bottom: 48px;
+}
+
+main {
+  border-top: 8px solid hsla(0, 0%, 60%, 1);
+  padding: 64px 0;
+  background-color: hsla(0, 0%, 40%, 1);
+}
+
+.card {
+  margin: 0 auto;
+  max-width: 70ch;
+  padding: 8px;
+  background-color: hsla(0, 0%, 100%, 1);
+}
+
+.indented-heading {
+  border-bottom: 8px solid hsla(45, 100%, 40%, 1);
+  margin-left: -16px;
+  width: fit-content;
+  padding: 16px 32px;
+  background-color: hsla(45, 100%, 50%, 1);
+}
+
+.card p {
+  padding: 16px; 
+}
+
+
