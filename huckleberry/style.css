@@ -17,6 +17,7 @@ body {
 
 .max-width-wrapper {
   max-width: 800px;
+  margin: 0 auto;
 }
 
 strong {
@@ -24,7 +25,8 @@ strong {
 }
 
 .intro-chunk {
-  margin: 96px auto 64px;
+  margin-top: 96px;
+  margin-bottom: 64px;
   padding: 24px;
 }
 
@@ -44,8 +46,10 @@ main {
 
 .card {
   margin: 0 auto;
+  border-bottom: 8px solid hsla(0, 0%, 60%, 1);
   padding: 8px;
   background-color: hsla(0, 0%, 100%, 1);
+
 }
 
 .indented-heading {
