@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
+import { QUERIES } from "../../constants";
 
 const SecondaryStory = ({ id, title, image, location, abstract }) => {
   return (
@@ -7,7 +8,10 @@ const SecondaryStory = ({ id, title, image, location, abstract }) => {
       <Wrapper>
         <Image alt={image.alt} src={image.src} />
         <Heading>{title}</Heading>
-        <Abstract>{abstract}</Abstract>
+        {/* Preventing buggy ellipsis in grid's child with additional div */}
+        <div>
+          <Abstract>{abstract}</Abstract>
+        </div>
       </Wrapper>
     </a>
   );
@@ -16,11 +20,16 @@ const SecondaryStory = ({ id, title, image, location, abstract }) => {
 const Wrapper = styled.article`
   display: grid;
   grid-template-areas:
-    'image heading'
-    'image abstract';
+    "image heading"
+    "image abstract";
   gap: 4px 16px;
   grid-template-columns: 120px 1fr;
   color: var(--color-gray-900);
+  
+  @media ${QUERIES.tabletOnly} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Image = styled.img`
@@ -42,6 +51,11 @@ const Heading = styled.h2`
 `;
 
 const Abstract = styled.p`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* Hidden due to ellipsis */
+  overflow: hidden;
   grid-area: abstract;
   font-size: 1rem;
   white-space: pre-wrap;
