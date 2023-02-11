@@ -1,17 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import styled from 'styled-components/macro';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import React from "react";
+import styled from "styled-components/macro";
+import { DialogOverlay, DialogContent } from "@reach/dialog";
 
-import { QUERIES, WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from "../../constants";
 
-import UnstyledButton from '../UnstyledButton';
-import Icon from '../Icon';
-import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from "../UnstyledButton";
+import Icon from "../Icon";
+import VisuallyHidden from "../VisuallyHidden";
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+      <Backdrop />
       <Content aria-label="Menu">
         <CloseButton onClick={onDismiss}>
           <Icon id="close" />
@@ -42,24 +43,66 @@ const Overlay = styled(DialogOverlay)`
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-backdrop);
+  background: transparent;
   display: flex;
   justify-content: flex-end;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+const Backdrop = styled.div`
+  position: absolute;
+  inset: 0;
+  background: var(--color-backdrop);
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: fade-in 300ms ease-out;
+  }
 `;
 
 const Content = styled(DialogContent)`
+  --overshoot: 16px;
+  position: relative;
   background: white;
-  width: 300px;
+  margin-right: -16px;
+  width: calc(300px + var(--overshoot));
   height: 100%;
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: slide-in 300ms cubic-bezier(0.17, 0.63, 0.12, 1.08) backwards;
+    animation-delay: 200ms;
+    * {
+      animation: fade-in 300ms ease-in backwards;
+      animation-delay: 300ms;
+    }
+  }
 `;
 
 const CloseButton = styled(UnstyledButton)`
   position: absolute;
   top: 10px;
-  right: 0;
+  right: var(--overshoot);
   padding: 16px;
 `;
 
